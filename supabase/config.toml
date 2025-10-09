@@ -1,0 +1,4 @@
+project_id = "wgxmwzexsmohfpidswtx"
+
+[functions.generate-trip-budget]
+verify_jwt = false
