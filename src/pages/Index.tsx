@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { TripForm, type TripFormData } from "@/components/TripForm";
 import { TripResult } from "@/components/TripResult";
 import { useToast } from "@/hooks/use-toast";
-import { Plane } from "lucide-react";
+import { Plane, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   const [tripResult, setTripResult] = useState<string | null>(null);
@@ -72,6 +74,12 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               AI-powered travel budget calculator. Get instant cost estimates, smart saving tips, and personalized itineraries for your next adventure.
             </p>
+            <Link to="/blog" className="inline-block mt-6">
+              <Button variant="outline" size="lg">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Read Travel Tips & Guides
+              </Button>
+            </Link>
           </div>
         </header>
 
