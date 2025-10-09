@@ -13,6 +13,7 @@ interface TripFormProps {
 }
 
 export interface TripFormData {
+  origin: string;
   destination: string;
   days: number;
   travelers: number;
@@ -22,6 +23,7 @@ export interface TripFormData {
 export const TripForm = ({ onGenerateBudget, isLoading }: TripFormProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<TripFormData>({
+    origin: "",
     destination: "",
     days: 3,
     travelers: 1,
@@ -31,6 +33,15 @@ export const TripForm = ({ onGenerateBudget, isLoading }: TripFormProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!formData.origin.trim()) {
+      toast({
+        title: "Pickup point required",
+        description: "Please enter your departure city",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!formData.destination.trim()) {
       toast({
         title: "Destination required",
@@ -64,6 +75,22 @@ export const TripForm = ({ onGenerateBudget, isLoading }: TripFormProps) => {
   return (
     <Card className="w-full max-w-2xl p-8 backdrop-blur-lg bg-card/80 border-border/50 shadow-soft">
       <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="space-y-2">
+          <Label htmlFor="origin" className="flex items-center gap-2 text-base">
+            <Plane className="w-4 h-4 text-secondary rotate-45" />
+            Pickup Point (Origin)
+          </Label>
+          <Input
+            id="origin"
+            type="text"
+            placeholder="e.g., New York, USA"
+            value={formData.origin}
+            onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
+            className="text-base"
+            required
+          />
+        </div>
+
         <div className="space-y-2">
           <Label htmlFor="destination" className="flex items-center gap-2 text-base">
             <Plane className="w-4 h-4 text-primary" />

@@ -12,10 +12,10 @@ serve(async (req) => {
   }
 
   try {
-    const { destination, days, travelers, budgetType } = await req.json();
+    const { origin, destination, days, travelers, budgetType } = await req.json();
 
     // Validate input
-    if (!destination || !days || !travelers || !budgetType) {
+    if (!origin || !destination || !days || !travelers || !budgetType) {
       return new Response(
         JSON.stringify({ error: "Missing required fields" }),
         { 
@@ -40,22 +40,26 @@ serve(async (req) => {
     // Construct AI prompt
     const prompt = `You are a professional travel budget consultant. Create a detailed trip budget estimate with the following information:
 
+Origin (Pickup Point): ${origin}
 Destination: ${destination}
 Duration: ${days} days
 Number of travelers: ${travelers}
 Budget type: ${budgetType}
 
+IMPORTANT: Include round-trip flight costs from ${origin} to ${destination} and back in your estimates.
+
 Please provide:
-1. Total Estimated Cost (in INR or USD - specify currency)
+1. Total Estimated Cost (in USD - include everything: flights + stay + food + transport + activities)
 2. Detailed Cost Breakdown:
-   - Stay/Accommodation: [amount]
-   - Food/Dining: [amount]
-   - Transportation: [amount]
+   - Round-trip Flights (${origin} to ${destination}): [amount per person x ${travelers} travelers]
+   - Stay/Accommodation: [amount for ${days} days]
+   - Food/Dining: [amount for ${days} days]
+   - Local Transportation: [amount]
    - Activities/Entertainment: [amount]
-3. 3-4 Smart Money-Saving Tips specific to this destination and budget type
+3. 3-4 Smart Money-Saving Tips specific to this route and budget type
 4. A brief sample itinerary suggestion (optional, 2-3 day highlights)
 
-Format the response clearly with sections and be specific with numbers. Make it practical and actionable.`;
+Format the response clearly with sections and be specific with numbers. Make sure flight costs are realistic based on the route distance and budget type. Make it practical and actionable.`;
 
     console.log("Calling Lovable AI for budget generation...");
 
