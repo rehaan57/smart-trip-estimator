@@ -50,12 +50,18 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
-        'gradient-warm': 'var(--gradient-warm)',
+        'gradient-secondary': 'var(--gradient-secondary)',
+        'gradient-luxury': 'var(--gradient-luxury)',
         'gradient-bg': 'var(--gradient-bg)',
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',
         'glow': 'var(--shadow-glow)',
+        'premium': 'var(--shadow-premium)',
+      },
+      fontFamily: {
+        'display': ['Cormorant Garamond', 'serif'],
+        'sans': ['Montserrat', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

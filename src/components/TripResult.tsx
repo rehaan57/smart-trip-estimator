@@ -73,35 +73,42 @@ export const TripResult = ({ result, onReset }: TripResultProps) => {
   };
 
   return (
-    <div className="w-full max-w-4xl space-y-6">
+    <div className="w-full max-w-5xl space-y-8">
       {/* Total Cost Card */}
-      <Card className="p-8 backdrop-blur-lg bg-gradient-primary border-0 shadow-glow">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-primary-foreground mb-2">Estimated Total Cost</h2>
-          <p className="text-4xl md:text-5xl font-bold text-primary-foreground">
+      <Card className="p-12 md:p-16 backdrop-blur-xl bg-gradient-primary border-0 shadow-premium relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&h=1080&fit=crop&q=80')] opacity-10 bg-cover bg-center"></div>
+        <div className="relative text-center">
+          <h2 className="text-2xl md:text-3xl font-display font-semibold text-primary-foreground mb-4 tracking-wide">Your Bespoke Travel Investment</h2>
+          <p className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-primary-foreground tracking-tight">
             {parsed.totalCost || result.split("\n")[0]}
           </p>
+          <p className="text-primary-foreground/80 mt-4 text-lg">Comprehensive budget for your luxury journey</p>
         </div>
       </Card>
 
       {/* Cost Breakdown */}
       {parsed.breakdown.length > 0 && (
-        <Card className="p-8 backdrop-blur-lg bg-card/80 border-border/50 shadow-soft">
-          <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <DollarSign className="w-6 h-6 text-primary" />
-            Cost Breakdown
+        <Card className="p-10 md:p-12 backdrop-blur-xl bg-card/60 border-primary/20 shadow-premium relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-secondary opacity-5 rounded-full blur-3xl"></div>
+          <h3 className="text-3xl md:text-4xl font-display font-bold mb-8 flex items-center gap-3 relative">
+            <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center">
+              <DollarSign className="w-6 h-6 text-primary" />
+            </div>
+            Investment Breakdown
           </h3>
-          <div className="space-y-4">
+          <div className="space-y-6 relative">
             {parsed.breakdown.map((item, index) => (
               <div key={index}>
-                <div className="flex items-center justify-between py-3">
-                  <div className="flex items-center gap-3">
-                    {getCategoryIcon(item.category)}
-                    <span className="text-lg font-medium">{item.category}</span>
+                <div className="flex items-center justify-between py-4 group hover:bg-primary/5 px-4 rounded-lg transition-all">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-all">
+                      {getCategoryIcon(item.category)}
+                    </div>
+                    <span className="text-lg md:text-xl font-medium">{item.category}</span>
                   </div>
-                  <span className="text-lg font-semibold text-primary">{item.amount}</span>
+                  <span className="text-lg md:text-xl font-bold text-primary">{item.amount}</span>
                 </div>
-                {index < parsed.breakdown.length - 1 && <Separator />}
+                {index < parsed.breakdown.length - 1 && <Separator className="opacity-30" />}
               </div>
             ))}
           </div>
@@ -110,18 +117,21 @@ export const TripResult = ({ result, onReset }: TripResultProps) => {
 
       {/* Money Saving Tips */}
       {parsed.tips.length > 0 && (
-        <Card className="p-8 backdrop-blur-lg bg-card/80 border-border/50 shadow-soft">
-          <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <Lightbulb className="w-6 h-6 text-secondary" />
-            Smart Saving Tips
+        <Card className="p-10 md:p-12 backdrop-blur-xl bg-card/60 border-secondary/20 shadow-premium relative overflow-hidden">
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-luxury opacity-5 rounded-full blur-3xl"></div>
+          <h3 className="text-3xl md:text-4xl font-display font-bold mb-8 flex items-center gap-3 relative">
+            <div className="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center">
+              <Lightbulb className="w-6 h-6 text-secondary" />
+            </div>
+            Insider Travel Strategies
           </h3>
-          <ul className="space-y-3">
+          <ul className="space-y-5 relative">
             {parsed.tips.map((tip, index) => (
-              <li key={index} className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-sm font-semibold text-secondary">{index + 1}</span>
+              <li key={index} className="flex items-start gap-4 group hover:bg-secondary/5 p-4 rounded-lg transition-all">
+                <div className="w-10 h-10 rounded-full bg-gradient-secondary flex items-center justify-center flex-shrink-0 shadow-soft">
+                  <span className="text-base font-bold text-secondary-foreground">{index + 1}</span>
                 </div>
-                <span className="text-base leading-relaxed">{tip}</span>
+                <span className="text-base md:text-lg leading-relaxed pt-1">{tip}</span>
               </li>
             ))}
           </ul>
@@ -130,13 +140,16 @@ export const TripResult = ({ result, onReset }: TripResultProps) => {
 
       {/* Optional Itinerary */}
       {parsed.itinerary && (
-        <Card className="p-8 backdrop-blur-lg bg-card/80 border-border/50 shadow-soft">
-          <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-            <MapPin className="w-6 h-6 text-accent" />
-            Sample Itinerary
+        <Card className="p-10 md:p-12 backdrop-blur-xl bg-card/60 border-accent/20 shadow-premium relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-luxury opacity-5 rounded-full blur-3xl"></div>
+          <h3 className="text-3xl md:text-4xl font-display font-bold mb-8 flex items-center gap-3 relative">
+            <div className="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center">
+              <MapPin className="w-6 h-6 text-accent" />
+            </div>
+            Curated Itinerary
           </h3>
-          <div className="prose prose-sm max-w-none">
-            <pre className="whitespace-pre-wrap font-sans text-base leading-relaxed">
+          <div className="prose prose-lg max-w-none relative">
+            <pre className="whitespace-pre-wrap font-sans text-base md:text-lg leading-relaxed text-foreground/90 bg-background/30 p-6 rounded-xl">
               {parsed.itinerary}
             </pre>
           </div>
@@ -144,15 +157,15 @@ export const TripResult = ({ result, onReset }: TripResultProps) => {
       )}
 
       {/* Plan Another Trip Button */}
-      <div className="flex justify-center pt-4">
+      <div className="flex justify-center pt-8">
         <Button
           onClick={onReset}
           variant="outline"
           size="lg"
-          className="gap-2 text-base px-8"
+          className="gap-3 text-lg px-10 py-7 border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all shadow-soft"
         >
-          <RefreshCw className="w-4 h-4" />
-          Plan Another Trip
+          <RefreshCw className="w-5 h-5" />
+          Plan Another Journey
         </Button>
       </div>
     </div>

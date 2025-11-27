@@ -53,38 +53,74 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-bg relative overflow-hidden">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl"></div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Hero Background with Image Collage */}
+      <div className="fixed inset-0 z-0">
+        {/* Main background gradient */}
+        <div className="absolute inset-0 bg-gradient-bg"></div>
+        
+        {/* Image Grid - Different continents */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="grid grid-cols-3 grid-rows-3 h-full">
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=800&fit=crop&q=80" alt="Paris" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=800&fit=crop&q=80" alt="Mountains" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&h=800&fit=crop&q=80" alt="Japan" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&h=800&fit=crop&q=80" alt="Iceland" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&h=800&fit=crop&q=80" alt="Beach" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=800&fit=crop&q=80" alt="Desert" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=800&h=800&fit=crop&q=80" alt="Morocco" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800&h=800&fit=crop&q=80" alt="Road Trip" className="w-full h-full object-cover" />
+            </div>
+            <div className="overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&h=800&fit=crop&q=80" alt="Lake" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        </div>
+        
+        {/* Overlay gradients */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent"></div>
       </div>
 
       {/* Content */}
       <div className="relative z-10">
-        <header className="pt-12 pb-8 px-4">
+        <header className="pt-16 pb-12 px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-primary rounded-2xl mb-6 shadow-glow">
-              <Plane className="w-8 h-8 text-primary-foreground" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-primary rounded-3xl mb-8 shadow-premium">
+              <Plane className="w-10 h-10 text-primary-foreground" />
             </div>
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent leading-tight">
               TripBudget
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              AI-powered travel budget calculator. Get instant cost estimates, smart saving tips, and personalized itineraries for your next adventure.
+            <p className="text-xl md:text-2xl text-foreground/80 max-w-3xl mx-auto font-light leading-relaxed mb-8">
+              Experience the world with confidence. AI-powered luxury travel budgeting for discerning travelers seeking extraordinary adventures.
             </p>
-            <Link to="/blog" className="inline-block mt-6">
-              <Button variant="outline" size="lg">
-                <BookOpen className="w-4 h-4 mr-2" />
-                Read Travel Tips & Guides
+            <Link to="/blog" className="inline-block">
+              <Button variant="outline" size="lg" className="border-primary/30 hover:bg-primary/10 text-lg px-8 py-6">
+                <BookOpen className="w-5 h-5 mr-2" />
+                Explore Travel Insights
               </Button>
             </Link>
           </div>
         </header>
 
-        <main className="pb-20 px-4">
-          <div className="max-w-4xl mx-auto flex flex-col items-center">
+        <main className="pb-24 px-4">
+          <div className="max-w-5xl mx-auto flex flex-col items-center">
             {!tripResult ? (
               <TripForm onGenerateBudget={handleGenerateBudget} isLoading={isLoading} />
             ) : (

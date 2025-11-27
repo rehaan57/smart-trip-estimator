@@ -73,106 +73,130 @@ export const TripForm = ({ onGenerateBudget, isLoading }: TripFormProps) => {
   };
 
   return (
-    <Card className="w-full max-w-2xl p-8 backdrop-blur-lg bg-card/80 border-border/50 shadow-soft">
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="space-y-2">
-          <Label htmlFor="origin" className="flex items-center gap-2 text-base">
-            <Plane className="w-4 h-4 text-secondary rotate-45" />
-            Pickup Point (Origin)
-          </Label>
-          <Input
-            id="origin"
-            type="text"
-            placeholder="e.g., New York, USA"
-            value={formData.origin}
-            onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
-            className="text-base"
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="destination" className="flex items-center gap-2 text-base">
-            <Plane className="w-4 h-4 text-primary" />
-            Destination
-          </Label>
-          <Input
-            id="destination"
-            type="text"
-            placeholder="e.g., Paris, France"
-            value={formData.destination}
-            onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-            className="text-base"
-            required
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <Label htmlFor="days" className="flex items-center gap-2 text-base">
-              <Calendar className="w-4 h-4 text-primary" />
-              Number of Days
+    <Card className="w-full max-w-3xl p-10 md:p-12 backdrop-blur-xl bg-card/60 border-primary/20 shadow-premium relative overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-primary opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-luxury opacity-10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+      
+      <div className="relative">
+        <h2 className="text-3xl md:text-4xl font-display font-bold text-center mb-2 bg-gradient-primary bg-clip-text text-transparent">
+          Plan Your Journey
+        </h2>
+        <p className="text-center text-muted-foreground mb-8">Precision budgeting for extraordinary experiences</p>
+        
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div className="space-y-3">
+            <Label htmlFor="origin" className="flex items-center gap-2 text-base font-medium text-foreground/90">
+              <div className="w-8 h-8 rounded-lg bg-secondary/20 flex items-center justify-center">
+                <Plane className="w-4 h-4 text-secondary rotate-45" />
+              </div>
+              Departure City
             </Label>
             <Input
-              id="days"
-              type="number"
-              min="1"
-              max="365"
-              value={formData.days}
-              onChange={(e) => setFormData({ ...formData, days: parseInt(e.target.value) || 1 })}
-              className="text-base"
+              id="origin"
+              type="text"
+              placeholder="New York, Tokyo, London..."
+              value={formData.origin}
+              onChange={(e) => setFormData({ ...formData, origin: e.target.value })}
+              className="text-base h-12 bg-background/50 border-border/50 focus:border-primary/50 transition-all"
               required
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="travelers" className="flex items-center gap-2 text-base">
-              <Users className="w-4 h-4 text-primary" />
-              Number of Travelers
+          <div className="space-y-3">
+            <Label htmlFor="destination" className="flex items-center gap-2 text-base font-medium text-foreground/90">
+              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                <Plane className="w-4 h-4 text-primary" />
+              </div>
+              Dream Destination
             </Label>
             <Input
-              id="travelers"
-              type="number"
-              min="1"
-              max="50"
-              value={formData.travelers}
-              onChange={(e) => setFormData({ ...formData, travelers: parseInt(e.target.value) || 1 })}
-              className="text-base"
+              id="destination"
+              type="text"
+              placeholder="Bali, Paris, Maldives..."
+              value={formData.destination}
+              onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
+              className="text-base h-12 bg-background/50 border-border/50 focus:border-primary/50 transition-all"
               required
             />
           </div>
-        </div>
 
-        <div className="space-y-2">
-          <Label htmlFor="budgetType" className="flex items-center gap-2 text-base">
-            <Wallet className="w-4 h-4 text-primary" />
-            Budget Type
-          </Label>
-          <Select
-            value={formData.budgetType}
-            onValueChange={(value: "Low" | "Medium" | "Luxury") =>
-              setFormData({ ...formData, budgetType: value })
-            }
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-3">
+              <Label htmlFor="days" className="flex items-center gap-2 text-base font-medium text-foreground/90">
+                <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
+                  <Calendar className="w-4 h-4 text-accent" />
+                </div>
+                Duration
+              </Label>
+              <Input
+                id="days"
+                type="number"
+                min="1"
+                max="365"
+                value={formData.days}
+                onChange={(e) => setFormData({ ...formData, days: parseInt(e.target.value) || 1 })}
+                className="text-base h-12 bg-background/50 border-border/50 focus:border-primary/50 transition-all"
+                required
+              />
+            </div>
+
+            <div className="space-y-3">
+              <Label htmlFor="travelers" className="flex items-center gap-2 text-base font-medium text-foreground/90">
+                <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
+                  <Users className="w-4 h-4 text-accent" />
+                </div>
+                Travelers
+              </Label>
+              <Input
+                id="travelers"
+                type="number"
+                min="1"
+                max="50"
+                value={formData.travelers}
+                onChange={(e) => setFormData({ ...formData, travelers: parseInt(e.target.value) || 1 })}
+                className="text-base h-12 bg-background/50 border-border/50 focus:border-primary/50 transition-all"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <Label htmlFor="budgetType" className="flex items-center gap-2 text-base font-medium text-foreground/90">
+              <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center">
+                <Wallet className="w-4 h-4 text-primary" />
+              </div>
+              Experience Level
+            </Label>
+            <Select
+              value={formData.budgetType}
+              onValueChange={(value: "Low" | "Medium" | "Luxury") =>
+                setFormData({ ...formData, budgetType: value })
+              }
+            >
+              <SelectTrigger id="budgetType" className="text-base h-12 bg-background/50 border-border/50">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Low">Budget Explorer</SelectItem>
+                <SelectItem value="Medium">Comfort Traveler</SelectItem>
+                <SelectItem value="Luxury">Luxury Connoisseur</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full bg-gradient-primary hover:opacity-90 transition-all text-lg py-7 shadow-premium font-semibold relative overflow-hidden group"
+            disabled={isLoading}
           >
-            <SelectTrigger id="budgetType" className="text-base">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Low">Low Budget</SelectItem>
-              <SelectItem value="Medium">Medium Budget</SelectItem>
-              <SelectItem value="Luxury">Luxury</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        <Button
-          type="submit"
-          className="w-full bg-gradient-primary hover:opacity-90 transition-opacity text-lg py-6 shadow-glow"
-          disabled={isLoading}
-        >
-          {isLoading ? "Calculating Your Budget..." : "Generate Trip Budget"}
-        </Button>
-      </form>
+            <span className="relative z-10">
+              {isLoading ? "Crafting Your Perfect Budget..." : "Calculate My Budget"}
+            </span>
+            <div className="absolute inset-0 bg-gradient-luxury opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </Button>
+        </form>
+      </div>
     </Card>
   );
 };
